@@ -124,7 +124,7 @@ let getOriginalUrl = async function (req, res) {
         } else{
             let findUrlCode = await urlModel.findOne({urlCode : req.params.urlCode})
 
-            if(!findUrlCode) return res.status(400).send({status:false,message:"urlcode is not present "})
+            if(!findUrlCode) return res.status(404).send({status:false,message:"urlcode is not present "})
             await SET_ASYNC(`${urlCode}`, JSON.stringify(findUrlCode))
             return res.status(302).redirect(findUrlCode.longUrl)
         }
